@@ -55,7 +55,7 @@
       <div class="sidebar-heading">
         Interface
       </div>
-
+      {% block head %}
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -70,6 +70,8 @@
           </div>
         </div>
       </li>
+      {% endblock %}
+
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
@@ -265,6 +267,27 @@
   </div>
 
 
+<script type="text/javascript">
+
+
+  <!-- Bootstrap core Java-->
+  < src="{% static 'vendor/jquery/jquery.min.js' %}"></>
+  < src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></>
+
+  <!-- Core plugin Java-->
+  < src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></>
+
+  <!-- Custom s for all pages-->
+  < src="{% static 'js/sb-admin-2.min.js' %}"></>
+
+  <!-- Page level plugins -->
+  < src="{% static 'vendor/chart.js/Chart.min.js' %}"></>
+
+  <!-- Page level custom s -->
+  < src="{% static 'js/demo/chart-area-demo.js' %}"></>
+  < src="{% static 'js/demo/chart-pie-demo.js' %}"></>
+
+</script>
 
 
 </body>
