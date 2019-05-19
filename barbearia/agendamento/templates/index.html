@@ -1,295 +1,216 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="deion" content="">
-  <meta name="author" content="">
-
-  <title>Consultorio</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-  <link href="{% static ' https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i'%} "  rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <title>Barbearia</title>
+  <link rel="stylesheet" href="{% static 'node_modules/font-awesome/css/font-awesome.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'node_modules/perfect-scrollbar/dist/css/perfect-scrollbar.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+  <style media="screen">
+    #background{
+      background: url=("{% static 'images/img/barbearia.jpeg' %}");
+    }
+  </style>
 
 </head>
 
-<body id="page-top">
+<body>
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Barbearia dos Amigos </div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Painel de controle</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Interface
+  <div class=" container-scroller">
+    {% block menu %}
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="bg-white text-center navbar-brand-wrapper">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="static/images/logo_star_black.png" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
       </div>
-      {% block head %}
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-          </div>
-        </div>
-      </li>
-      {% endblock %}
-
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
+      <div class="navbar-menu-wrapper d-flex align-items-center">
+        <button class="navbar-toggler navbar-toggler d-none d-lg-block navbar-dark align-self-center mr-3" type="button" data-toggle="minimize">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline mt-2 mt-md-0 d-none d-lg-block">
+          <input class="form-control mr-sm-2 search" type="text" placeholder="Search">
+        </form>
+        <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+          <li class="nav-item">
+            <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="static/images/face.jpg" alt=""></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa fa-th"></i></a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
+    </nav>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Paginas</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
+
+
+    <!-- partial -->
+
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
+          <div class="user-info">
+            <img src="static/images/face.jpg" alt="">
+            <p class="name">Logo</p>
+            <p class="designation">Manager</p>
+            <span class="online"></span>
           </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Graficos</span></a>
-      </li>
-
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Relatório</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquise..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
+          <ul class="nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}">
+                <img src="static/images/icons/1.png" alt="">
+                <span class="menu-title">Dashboard</span>
               </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <img src="static/images/icons/2.png" alt="">
+                <span class="menu-title">Widgets</span>
+              </a>
             </li>
 
-
-            <!-- Nav Item - informacoes do usuario logado -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contato' %}">
+                <img src="static/images/icons/2.png" alt="">
+                <span class="menu-title">contato</span>
               </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
             </li>
 
-          </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'curriculo' %}">
+                <img src="static/images/icons/2.png" alt="">
+                <span class="menu-title">Curriculo</span>
+              </a>
+            </li>
 
         </nav>
-        <!-- End of Topbar -->
+         {% endblock %}
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © Fernando Bento 2019</span>
-          </div>
+         {% block conteudo %}
+        <div class="content-wrapper row
+        " background="static/images/img/barbearia.jpeg">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
+              <div class="card card-statistics">
+                <div class="card-body">
+                  <div class="clearfix">
+                    <div class="float-left">
+                      <h4 class="text-warning">
+                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                      </h4>
+                    </div>
+                    <div class="float-right">
+                      <p class="card-text text-dark">Orders</p>
+                      <h4 class="bold-text">656</h4>
+                    </div>
+                  </div>
+                  <p class="text-muted">
+                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Ticket Médio
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
+              <div class="card card-statistics">
+                <div class="card-body">
+                  <div class="clearfix">
+                    <div class="float-left">
+                      <h4 class="text-warning">
+                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                      </h4>
+                    </div>
+                    <div class="float-right">
+                      <p class="card-text text-dark">Orders</p>
+                      <h4 class="bold-text">656</h4>
+                    </div>
+                  </div>
+                  <p class="text-muted">
+                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Faturamento
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
+              <div class="card card-statistics">
+                <div class="card-body">
+                  <div class="clearfix">
+                    <div class="float-left">
+                      <h4 class="text-warning">
+                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                      </h4>
+                    </div>
+                    <div class="float-right">
+                      <p class="card-text text-dark">Orders</p>
+                      <h4 class="bold-text">656</h4>
+                    </div>
+                  </div>
+                  <p class="text-muted">
+                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Nº Atendimento
+                  </p>
+                </div>
+              </div>
+            </div>
+
+
+
         </div>
-      </footer>
-      <!-- End of Footer -->
+         {% endblock %}
 
-    </div>
-    <!-- End of Content Wrapper -->
 
-  </div>
-  <!-- End of Page Wrapper -->
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+         {% block rodape %}
+        <!-- partial:partials/_footer.html -->
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+        <div class="footer">
+          <footer class="footer">
+            <div class="container-fluid clearfix">
+              <span class="float-right">
+                <a href="#">Star Admin</a> &copy; 2017
+              </span>
+            </div>
+          </footer>
+
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login">Logout</a>
-        </div>
+
+        <!-- partial -->
       </div>
     </div>
+
+
   </div>
 
-
-<script type="text/javascript">
-
-
-  <!-- Bootstrap core Java-->
-  < src="{% static 'vendor/jquery/jquery.min.js' %}"></>
-  < src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></>
-
-  <!-- Core plugin Java-->
-  < src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></>
-
-  <!-- Custom s for all pages-->
-  < src="{% static 'js/sb-admin-2.min.js' %}"></>
-
-  <!-- Page level plugins -->
-  < src="{% static 'vendor/chart.js/Chart.min.js' %}"></>
-
-  <!-- Page level custom s -->
-  < src="{% static 'js/demo/chart-area-demo.js' %}"></>
-  < src="{% static 'js/demo/chart-pie-demo.js' %}"></>
-
-</script>
-
-
+<!-- {% block javascript %} -->
+  <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
+  <script src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
+  <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'node_modules/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js' %}"></script>
+  <!-- <script src=" https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMaps" async defer></script> -->
+  <script src="{% static 'js/off-canvas.js' %}"></script>
+  <script src="{% static 'js/hoverable-collapse.js'%}"></script>
+  <script src="{% static 'js/misc.js' %}"></script>
+  <script src="{% static 'js/chart.js' %}"></script>
+  <script src="{% static 'js/maps.js' %}"></script>
+<!-- {% endblock %} -->
+{% endblock %}
 </body>
+
 
 </html>
