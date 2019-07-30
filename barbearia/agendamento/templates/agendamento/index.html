@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <style media="screen">
     #background{
       background: url=("{% static 'images/img/barbearia.jpeg' %}");
@@ -21,14 +23,14 @@
 </head>
 
 <body>
-
+ 
   <div class=" container-scroller">
-    {% block menu %}
+   {% block nav %}
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="bg-white text-center navbar-brand-wrapper">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="static/images/logo_star_black.png" /></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="static/images/logo_star_mini.jpg" alt=""></a>
+        <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'images/logo_star_black.png' %}" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'images/logo_star_mini.jpg' %}" alt=""></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <button class="navbar-toggler navbar-toggler d-none d-lg-block navbar-dark align-self-center mr-3" type="button" data-toggle="minimize">
@@ -51,9 +53,6 @@
       </div>
     </nav>
 
-
-
-    <!-- partial -->
 
     <div class="container-fluid">
       <div class="row row-offcanvas row-offcanvas-right">
@@ -80,11 +79,27 @@
             </li>
 
             <li class="nav-item">
+            
               <a class="nav-link" href="{% url 'contato' %}">
                 <img src="static/images/icons/2.png" alt="">
                 <span class="menu-title">contato</span>
               </a>
             </li>
+
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Cadastros
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'estado' %}">Estado</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'cadastrar-pessoa' %}">pessoa</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-barbeiro' %}">barbeiro</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">cliente</a>
+            </div>
+          </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'curriculo' %}">
@@ -94,88 +109,16 @@
             </li>
 
         </nav>
-         {% endblock %}
-
-         {% block conteudo %}
-        <div class="content-wrapper row
-        " background="static/images/img/barbearia.jpeg">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <h4 class="text-warning">
-                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
-                      </h4>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-dark">Orders</p>
-                      <h4 class="bold-text">656</h4>
-                    </div>
-                  </div>
-                  <p class="text-muted">
-                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Ticket Médio
-                  </p>
-                </div>
-              </div>
-            </div>
+        {% endblock %}
 
 
-
-
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <h4 class="text-warning">
-                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
-                      </h4>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-dark">Orders</p>
-                      <h4 class="bold-text">656</h4>
-                    </div>
-                  </div>
-                  <p class="text-muted">
-                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Faturamento
-                  </p>
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 mb-4">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <h4 class="text-warning">
-                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
-                      </h4>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-dark">Orders</p>
-                      <h4 class="bold-text">656</h4>
-                    </div>
-                  </div>
-                  <p class="text-muted">
-                    <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Nº Atendimento
-                  </p>
-                </div>
-              </div>
-            </div>
-
-
-
-        </div>
-         {% endblock %}
-
-
-
-         {% block rodape %}
+ {% block conteudo%}
+ 
+ {% endblock%}
+ 
+ 
+ 
+ {% block rodape %}
         <!-- partial:partials/_footer.html -->
 
         <div class="footer">
@@ -195,20 +138,20 @@
 
 
   </div>
+  {% endblock %}
 
-<!-- {% block javascript %} -->
+{% block javascript %}
   <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
   <script src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
   <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'node_modules/chart.js/dist/Chart.min.js' %}"></script>
   <script src="{% static 'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js' %}"></script>
-  <!-- <script src=" https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMaps" async defer></script> -->
+  <script src=" https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMaps" async defer></script> 
   <script src="{% static 'js/off-canvas.js' %}"></script>
   <script src="{% static 'js/hoverable-collapse.js'%}"></script>
   <script src="{% static 'js/misc.js' %}"></script>
   <script src="{% static 'js/chart.js' %}"></script>
   <script src="{% static 'js/maps.js' %}"></script>
-<!-- {% endblock %} -->
 {% endblock %}
 </body>
 
