@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'agendamento.apps.AgendamentoConfig',
+    'usuarios.apps.UsuariosConfig',
+
     'crispy_forms',
-    
+
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'barbearia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,3 +149,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# Nome da URL em que o usuário será redirecionado
+# https://docs.djangoproject.com/en/2.1/ref/settings/#auth
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'

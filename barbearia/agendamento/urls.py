@@ -10,7 +10,7 @@ urlpatterns = [
     path('formulario/', FormularioView.as_view(), name="formulario"),
 
         # URLS de Estado
-    path('cadastrar/estado/', EstadoCreate.as_view(), name="estado"),
+    path('cadastrar/estado/', EstadoCreate.as_view(), name="cadastrar-estado"),
     path('editar/estado/<int:pk>/', EstadoUpdate.as_view(), name="editar-estado"),
     path('excluir/estado/<int:pk>/', EstadoDelete.as_view(), name="excluir-estado"),
     path('listar/estados/', EstadoList.as_view(), name="listar-estados"),
@@ -21,11 +21,7 @@ urlpatterns = [
     path('excluir/cidade/<int:pk>/', CidadeDelete.as_view(), name="excluir-cidade"),
     path('listar/cidade/', CidadeList.as_view(), name="listar-cidades"),
 
-    # URLS de Pessoa
-    path('cadastrar/pessoa/', PessoaCreate.as_view(), name="cadastrar-pessoa"),
-    path('editar/pessoa/<int:pk>/', PessoaUpdate.as_view(), name="editar-pessoa"),
-    path('excluir/pessoa/<int:pk>/', PessoaDelete.as_view(), name="excluir-pessoa"),
-    path('listar/pessoa/', PessoaList.as_view(), name="listar-pessoas"),
+
 
     # URLS de cliente
     path('cadastrar/cliente/', ClienteCreate.as_view(), name="cadastrar-cliente"),
@@ -38,6 +34,18 @@ urlpatterns = [
     path('editar/barbeiro/<int:pk>/', BarbeiroUpdate.as_view(), name="editar-barbeiro"),
     path('excluir/barbeiro/<int:pk>/', BarbeiroDelete.as_view(), name="excluir-barbeiro"),
     path('listar/barbeiro/', BarbeiroList.as_view(), name="listar-barbeiros"),
- 
+    
+    # URLS de agenda
+    path('cadastrar/agenda/', AgendamentoCreate.as_view(),name="cadastrar-agenda"),
+    path('editar/agenda/<int:pk>/',AgendamentoUpdate.as_view(), name="editar-agenda"),
+    path('excluir/agenda/<int:pk>/',AgendamentoDelete.as_view(), name="excluir-agenda"),
+    path('listas/agenda/', AgendamentoList.as_view(), name="listar-agendas"),
+    
+    # URLS de caixa
+    path('cadastrar/caixa/', CaixaCreate.as_view(),name="cadastrar-caixa"),
+    path('editar/barbeiro/<int:pk>/',CaixaUpdate.as_view(), name="editar-caixa"),
+    path('listas/caixa/', CaixaList.as_view(), name="listar-caixas"),
+    
+    
 
 ]

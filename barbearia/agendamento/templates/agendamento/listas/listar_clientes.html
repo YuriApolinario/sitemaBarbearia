@@ -1,4 +1,4 @@
-{% extends 'adocao/base.html' %}
+{% extends 'agendamento/index.html' %}
 
 {% load static %}
 
@@ -8,7 +8,7 @@
 {% endblock %}
 
 <!-- Bloco Principal -->
-{% block container %}
+{% block conteudo %}
 
 <div class="container py-5">
 
@@ -17,8 +17,7 @@
 
             <h3 class="border-bottom">
                 Lista de Estados cadastrados
-
-                <a href="{% url 'cadastrar-estado' %}" class="float-right btn btn-primary btn-sm">
+                <a href="{% url 'cadastrar-cliente' %}" class="float-right btn btn-primary btn-sm">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     Novo estado
                 </a>
@@ -42,16 +41,17 @@
 
                 <tbody>
 
-                    {% for estado in object_list %}
+                    {% for obj in object_list %}
                     <tr>
-                        <td>{{ estado.sigla }}</td>
-                        <td>{{ estado.nome }}</td>
+                        <td>{{ obj.sigla }}</td>
+                        <td>{{ obj.nome }}</td>
+
                         <td>
-                            <a href="{% url 'editar-estado' estado.pk %}" class="btn btn-outline-warning btn-sm">
+                            <a href="{% url 'editar-cliente' obj.pk %}" class="btn btn-outline-warning btn-sm">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
 
-                            <a href="{% url 'excluir-estado' estado.pk %}" class="btn btn-outline-danger btn-sm">
+                            <a href="{% url 'excluir-cliente' obj.pk %}" class="btn btn-outline-danger btn-sm">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>
@@ -61,6 +61,7 @@
                         <td colspan="100%">Nenhum estado cadastrado</td>
                     </tr>
                     {% endfor %}
+
 
                 </tbody>
 

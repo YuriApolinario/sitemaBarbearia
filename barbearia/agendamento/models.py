@@ -7,7 +7,6 @@ class Estado(models.Model):
     # nome_do_atributo = models.Tipo(configuração)
     sigla = models.CharField(max_length=2, unique=True)
     nome = models.CharField(max_length=50)
-
     # Como se fosse toString e self = this
     def __str__(self):
         return self.sigla + ' - ' + self.nome
@@ -25,29 +24,30 @@ class Cidade(models.Model):
         return self.nome + '/' + self.estado.sigla
 
 
-class Pessoa(models.Model):
-    nome = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11)
-    telefone = models.CharField(max_length=12)
-    dtnasc = models.CharField(max_length=10, help_text="DD/MM/YYYY")
-
-    def __str__(self):
-        return "{}".format(self.nome)
 
 
 class Cliente(models.Model):
-   nome = models.CharField(max_length=50)
-   cpf = models.CharField(max_length=11)
-   telefone = models.CharField(max_length=12)
-   dtnasc = models.CharField(max_length=10, help_text="DD/MM/YYYY")
+    nome = models.CharField(max_length=50)
+    cpf = models.CharField(max_length=11)
+    telefone = models.CharField(max_length=12)
 
- 
-
-
+  
 
 class Barbeiro(models.Model):
-  barbeiro = models.CharField(
-      max_length=50, verbose_name="Barbeiro")
+   nome = models.CharField(max_length=50)
+   especialidade = models.CharField(max_length=50)
+   
+   
+class Caixa(models.Model):
+    Barbeiro = models.ForeignKey(Barbeiro, on_delete=models.PROTECT)
+    entrada = models.CharField(max_length=5) 
+    saida = models.CharField(max_length=50)
+    formaPagamento = models.CharField(max_length=50)
  
-  def __str__(self):
-        return "{}".format(self.barbeiro)
+class Agendamento(models.Model):
+    data = models.CharField(max_length=11)
+    
+    
+    
+    
+    

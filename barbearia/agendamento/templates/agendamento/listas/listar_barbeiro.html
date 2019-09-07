@@ -1,4 +1,4 @@
-{% extends 'adocao/base.html' %}
+{% extends 'agendamento/index.html' %}
 
 {% load static %}
 
@@ -8,7 +8,7 @@
 {% endblock %}
 
 <!-- Bloco Principal -->
-{% block container %}
+{% block conteudo %}
 
 <div class="container py-5">
 
@@ -16,11 +16,11 @@
         <div class="col-lg">
 
             <h3 class="border-bottom">
-                Lista de Cidades cadastrados
+                Lista de Barbeiros cadastrados
 
-                <a href="{% url 'cadastrar-cidade' %}" class="float-right btn btn-primary btn-sm">
+                <a href="{% url 'cadastrar-barbeiro' %}" class="float-right btn btn-primary btn-sm">
                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    Novo cidade
+                    Novo Barbeiro
                 </a>
             </h3>
 
@@ -34,10 +34,9 @@
 
                 <thead>
                     <tr>
-                        <th>Cidade</th>
-                        <th>Estado</th>
-                        <th>Descrição</th>
-                        <th>Opções</th>
+                        <th>nome</th>
+                        
+                        <th>descricao</th>
                     </tr>
                 </thead>
 
@@ -46,21 +45,21 @@
                     {% for obj in object_list %}
                     <tr>
                         <td>{{ obj.nome }}</td>
-                        <td>{{ obj.estado }}</td>
-                        <td>{{ obj.descricao }}</td>
+                        <td>{{ obj.especialidade }}</td>
+                      
                         <td>
-                            <a href="{% url 'editar-cidade' obj.pk %}" class="btn btn-outline-warning btn-sm">
+                            <a href="{% url 'editar-barbeiro' obj.pk %}" class="btn btn-outline-warning btn-sm">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
 
-                            <a href="{% url 'excluir-cidade' obj.pk %}" class="btn btn-outline-danger btn-sm">
+                            <a href="{% url 'excluir-barbeiro' obj.pk %}" class="btn btn-outline-danger btn-sm">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="100%">Nenhuma cidade cadastrado</td>
+                        <td colspan="100%">Nenhum Barbeiro cadastrado</td>
                     </tr>
                     {% endfor %}
 

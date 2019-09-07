@@ -12,10 +12,11 @@
   <link rel="stylesheet" href="{% static 'node_modules/flag-icon-css/css/flag-icon.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <style media="screen">
-    #background{
+    #background {
       background: url=("{% static 'images/img/barbearia.jpeg' %}");
     }
   </style>
@@ -23,17 +24,27 @@
 </head>
 
 <body>
- 
+
   <div class=" container-scroller">
-   {% block nav %}
+    {% block nav %}
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="bg-white text-center navbar-brand-wrapper">
         <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'images/logo_star_black.png' %}" /></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'images/logo_star_mini.jpg' %}" alt=""></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'images/logo_star_mini.jpg' %}"
+            alt=""></a>
       </div>
+
+      
+
       <div class="navbar-menu-wrapper d-flex align-items-center">
-        <button class="navbar-toggler navbar-toggler d-none d-lg-block navbar-dark align-self-center mr-3" type="button" data-toggle="minimize">
+
+        
+
+
+
+        <button class="navbar-toggler navbar-toggler d-none d-lg-block navbar-dark align-self-center mr-3" type="button"
+          data-toggle="minimize">
           <span class="navbar-toggler-icon"></span>
         </button>
         <form class="form-inline mt-2 mt-md-0 d-none d-lg-block">
@@ -41,13 +52,15 @@
         </form>
         <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
           <li class="nav-item">
-            <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="static/images/face.jpg" alt=""></a>
+            <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="static/images/face.jpg"
+                alt=""></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-th"></i></a>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
@@ -58,12 +71,9 @@
       <div class="row row-offcanvas row-offcanvas-right">
         <!-- partial:partials/_sidebar.html -->
         <nav class="bg-white sidebar sidebar-offcanvas" id="sidebar">
-          <div class="user-info">
-            <img src="static/images/face.jpg" alt="">
-            <p class="name">Logo</p>
-            <p class="designation">Manager</p>
-            <span class="online"></span>
-          </div>
+          
+        {% if request.user.is_authenticated %}
+
           <ul class="nav">
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'index' %}">
@@ -79,7 +89,7 @@
             </li>
 
             <li class="nav-item">
-            
+
               <a class="nav-link" href="{% url 'contato' %}">
                 <img src="static/images/icons/2.png" alt="">
                 <span class="menu-title">contato</span>
@@ -87,19 +97,18 @@
             </li>
 
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Cadastros
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% url 'estado' %}">Estado</a>
-              <a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'cadastrar-pessoa' %}">pessoa</a>
-              <a class="dropdown-item" href="{% url 'cadastrar-barbeiro' %}">barbeiro</a>
-              <a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">cliente</a>
-            </div>
-          </li>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Cadastros
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'cadastrar-estado' %}">Estado</a>
+                <a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'cadastrar-barbeiro' %}">barbeiro</a>
+                <a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">cliente</a>
+              </div>
+            </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{% url 'curriculo' %}">
@@ -107,18 +116,27 @@
                 <span class="menu-title">Curriculo</span>
               </a>
             </li>
+           </ul> 
+        {% endif %}
 
         </nav>
         {% endblock %}
 
 
- {% block conteudo%}
- 
- {% endblock%}
- 
- 
- 
- {% block rodape %}
+        {% block conteudo%}
+        <div class="content-wrapper">
+
+          {% if request.user.is_authenticated %}
+          <h3>Olá {{ request.user.username }} </h3>
+
+          {% endif %}
+        </div>
+
+        {% endblock%}
+
+
+
+        {% block rodape %}
         <!-- partial:partials/_footer.html -->
 
         <div class="footer">
@@ -140,19 +158,24 @@
   </div>
   {% endblock %}
 
-{% block javascript %}
+  {% block javascript %}
+
+
+
+  {% endblock %}
   <script src="{% static 'node_modules/jquery/dist/jquery.min.js'%}"></script>
   <script src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
   <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'node_modules/chart.js/dist/Chart.min.js' %}"></script>
   <script src="{% static 'node_modules/perfect-scrollbar/dist/js/perfect-scrollbar.jquery.min.js' %}"></script>
-  <script src=" https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMaps" async defer></script> 
+  <script src=" https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMaps"
+    async defer></script>
+  <script src = "{% static 'js/jquery.mask.js '%}"></script>  
   <script src="{% static 'js/off-canvas.js' %}"></script>
   <script src="{% static 'js/hoverable-collapse.js'%}"></script>
   <script src="{% static 'js/misc.js' %}"></script>
   <script src="{% static 'js/chart.js' %}"></script>
   <script src="{% static 'js/maps.js' %}"></script>
-{% endblock %}
 </body>
 
 

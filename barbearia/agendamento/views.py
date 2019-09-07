@@ -5,7 +5,7 @@ from django.shortcuts import render
 # Importa função que vai chamar as urls pelo "name" delas
 from django.urls import reverse_lazy
 
-from .models import Pessoa, Barbeiro, Cidade, Estado, Cliente 
+from .models import Barbeiro, Cidade, Estado, Cliente, Caixa, Agendamento
 # Importar as classes Views para inserir, alterar e excluir utilizando formulários
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -14,6 +14,10 @@ from django.views.generic import TemplateView
 
 # Importa ListView para gerar as telas com tabelas
 from django.views.generic.list import ListView
+
+#impota o Mixin para obrigar logar
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -50,7 +54,8 @@ class FormularioView(TemplateView):
     template_name = "agendamento/formulario.html"
 ##################### INSERIR ######################
 
-class EstadoCreate(CreateView):
+
+class EstadoCreate(LoginRequiredMixin, CreateView):
     # Define qual o modelo pra essa classe vai criar o form
     model = Estado
     # Qual o html que será utilizado?
@@ -74,7 +79,7 @@ class EstadoCreate(CreateView):
         return context
 
 
-class CidadeCreate(CreateView):
+class CidadeCreate(LoginRequiredMixin, CreateView):
     model = Cidade
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-cidades")
@@ -88,39 +93,28 @@ class CidadeCreate(CreateView):
         context['classeBotao'] = "btn-primary"
         return context
 
-class PessoaCreate(CreateView):
-    model = Pessoa
-    template_name = "agendamento/formulario.html"
-    success_url = reverse_lazy("listar-pessoas")
-    fields = ['nome','cpf']
 
-    # Método utilizado para enviar dados ao template
-    def get_context_data(self, *args, **kwargs):
-        context = super(PessoaCreate,self).get_context_data(*args, **kwargs)
-        context['titulo'] = "Cadastro de Pessoas" 
-        context['botao'] = "cadastrar"
-        context['classBotao'] = "btn-primary"
-        return context
-    
-class ClienteCreate(CreateView):
+
+
+class ClienteCreate(LoginRequiredMixin, CreateView):
     model = Cliente
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
-    fields = ['descricao']
+    fields = ['nome','cpf','telefone']
 
     def get_context_data(self, *args, **kwargs):
         context = super(ClienteCreate, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Cdastro de clientes" 
         context['botao'] = "cadastrar"
-        context['classBotao'] = "btn-primary"
+        context['classesBotao'] = "btn-primary"
         return context
     
 
-class BarbeiroCreate(CreateView):
+class BarbeiroCreate(LoginRequiredMixin, CreateView):
     model = Barbeiro
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-barbeiros")
-    fields = ['descricao']
+    fields = ['nome','especialidade']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
@@ -131,12 +125,37 @@ class BarbeiroCreate(CreateView):
         return context
 
 
-
+class CaixaCreate(LoginRequiredMixin, CreateView):
+    model = Caixa
+    template_name = "agendamento/formulario.html"
+    success_url = reverse_lazy("movimento-caixa")
+    fields = ['entrada','saida', 'FormaPagamento']
+    
+    # Método utilizado para enviar dados ao template
+    def get_context_data(self, *args, **kwargs):
+        context = super(CaixaCreate, self).get_context_data(*args, **kwargs)
+        context['titulo'] = "Movimento Financeiro"
+        context['botao'] = "Venda"
+        context['classeBotao'] = "btn-primary"
+        return context
+    
+class AgendamentoCreate(LoginRequiredMixin,CreateView):
+    model = Agendamento
+    template_name = "agendamento/formulario.html"
+    succes_url = reverse_lazy("movimento-caixa")
+    fields=['data','hora','servico']
+    
+    def get_context_data(self,*args, **kwargs):
+        context = super(AgendamentoCreate, self ).get_context_data(*args, **kwargs)
+        context['titulo'] = "Agenda"
+        context['botao'] = "agendar"
+        context['classeBotao'] = "btn-primary"
+        return context
 
 ##################### EDITAR ######################
 
 
-class EstadoUpdate(UpdateView):
+class EstadoUpdate(LoginRequiredMixin, UpdateView):
     # Define qual o modelo pra essa classe vai criar o form
     model = Estado
     # Qual o html que será utilizado?
@@ -160,7 +179,7 @@ class EstadoUpdate(UpdateView):
         return context
 
 
-class CidadeUpdate(UpdateView):
+class CidadeUpdate(LoginRequiredMixin, UpdateView):
     model = Cidade
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-cidades")
@@ -175,53 +194,70 @@ class CidadeUpdate(UpdateView):
         return context
 
 
-class PessoaUpdate(UpdateView):
-    model = Pessoa
+class CaixaUpdate(LoginRequiredMixin, UpdateView):
+    model = Caixa
     template_name = "agendamento/formulario.html"
-    success_url = reverse_lazy("listar-pessoas")
+    success_url = reverse_lazy("listar-caixas")
     fields = ['descricao']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
-        context = super(TipoUpdate, self).get_context_data(*args, **kwargs)
-        context['titulo'] = "Editar cadastro de pessoa"
+        context = super(CaixaUpdate, self).get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar caixa"
         context['botao'] = "Salvar"
         context['classeBotao'] = "btn-success"
         return context
 
 
-class ClienteUpdate(UpdateView):
-    model = Cliente
+class AgendamentoUpdate(LoginRequiredMixin, UpdateView):
+    model = Agendamento
     template_name = "agendamento/formulario.html"
-    success_url = reverse_lazy("listar-clientes")
+    success_url = reverse_lazy("listar-agendamento")
     fields = ['descricao']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
-        context = super(RacaUpdate, self).get_context_data(*args, **kwargs)
+        context = super(AgendamentoUpdate, self).get_context_data(*args, **kwargs)
+        context['titulo'] = "Editar Agenda"
+        context['botao'] = "Salvar"
+        context['classeBotao'] = "btn-success"
+        return context
+
+
+
+class ClienteUpdate(LoginRequiredMixin, UpdateView):
+    model = Cliente
+    template_name = "agendamento/formulario.html"
+    success_url = reverse_lazy("listar-clientes")
+    fields = ['Nome, telefone,cpf']
+
+    # Método utilizado para enviar dados ao template
+    def get_context_data(self, *args, **kwargs):
+        context = super(ClienteUpdate, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Editar cadastro de clientes"
         context['botao'] = "Salvar"
         context['classeBotao'] = "btn-success"
         return context
 
 
-class BarbeiroUpdate(UpdateView):
+class BarbeiroUpdate(LoginRequiredMixin, UpdateView):
     model = Barbeiro
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-Barbeiro")
    
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
-        context = super(AnimalUpdate, self).get_context_data(*args, **kwargs)
+        context = super(BarbeiroUpdate, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Editar cadastro de Barbeiro"
         context['botao'] = "Salvar"
         context['classeBotao'] = "btn-primary"
         return context
 
+
 ##################### Excluir ######################
 
 
-class EstadoDelete(DeleteView):
+class EstadoDelete(LoginRequiredMixin, DeleteView):
     # Define qual o modelo pra essa classe vai criar o form
     model = Estado
     # Qual o html que será utilizado?
@@ -242,7 +278,7 @@ class EstadoDelete(DeleteView):
         # Devolve/envia o context para seu comportamento padrão
         return context
 
-class CidadeDelete(DeleteView):
+class CidadeDelete(LoginRequiredMixin, DeleteView):
     model = Cidade
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-cidades")
@@ -254,65 +290,76 @@ class CidadeDelete(DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
-class PessoaDelete(DeleteView):
-    model = Pessoa
-    template_name = "agendamento/formulario.html"
-    success_url = reverse_lazy("listar-pessoas")
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(TipoDelete, self).get_context_data(*args, **kwargs)
-        context['titulo'] = "Deseja excluir esse registro?"
-        context['botao'] = "Excluir"
-        context['classeBotao'] = "btn-danger"
-        return context
-
-class ClienteDelete(DeleteView):
+class ClienteDelete(LoginRequiredMixin, DeleteView):
     model = Cliente
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
 
     def get_context_data(self, *args, **kwargs):
-        context = super(RacaDelete, self).get_context_data(*args, **kwargs)
+        context = super(ClienteDelete, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Deseja excluir esse registro?"
         context['botao'] = "Excluir"
         context['classeBotao'] = "btn-danger"
         return context
 
-class BarbeiroDelete(DeleteView):
+class BarbeiroDelete(LoginRequiredMixin, DeleteView):
     model = Barbeiro
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-barbeiros")
 
     def get_context_data(self, *args, **kwargs):
-        context = super(AnimalDelete, self).get_context_data(*args, **kwargs)
+        context = super(BarbeiroDelete, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Deseja excluir esse registro?"
         context['botao'] = "Excluir"
         context['classeBotao'] = "btn-danger"
         return context
+
+
+class AgendamentoDelete(LoginRequiredMixin, DeleteView):
+    model = Agendamento
+    template_name = "agendamento/formulario.html"
+    success_url = reverse_lazy("listar-agendamento")
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AgendamentoDelete, self).get_context_data(*args, **kwargs)
+        context['titulo'] = "Deseja excluir esse registro?"
+        context['botao'] = "Excluir"
+        context['classeBotao'] = "btn-danger"
+        return context
+    
+    
 
 ##################### Listar ######################
 
 # Vai gerar uma tela com uma lista de estados
 
 
-class EstadoList(ListView):
+class EstadoList(LoginRequiredMixin, ListView):
     # Inform qual o modelo
     model = Estado
     # E o template
-    template_name = "agendamento/listas/list_estado.html"
+    template_name = "agendamento/listas/listar_estado.html"
 
-class CidadeList(ListView):
+class CidadeList(LoginRequiredMixin, ListView):
     model = Cidade
-    template_name = "agendamento/listas/list_cidade.html"
+    template_name = "agendamento/listas/listar_cidade.html"
 
-class PessoaList(ListView):
-    model = Pessoa
-    template_name = "agendamento/listas/listar_pessoas.html"
 
-class ClienteList(ListView):
+class ClienteList(LoginRequiredMixin, ListView):
     model = Cliente
     template_name = "agendamento/listas/listar_clientes.html"
 
-class BarbeiroList(ListView):
+class BarbeiroList(LoginRequiredMixin, ListView):
     model = Barbeiro
     template_name = "agendamento/listas/listar_barbeiro.html"
+    
+class AgendamentoList(LoginRequiredMixin, ListView):
+    model = Agendamento
+    template_name = "agendamento/listas/listar_agendamento.html"
+
+
+
+class CaixaList(LoginRequiredMixin, ListView):
+    model = Barbeiro
+    template_name = "agendamento/listas/listar_caixa.html"
