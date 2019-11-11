@@ -1,5 +1,9 @@
 from django.db import models
 
+#importar modelo user
+from django.contrib.auth.models import User
+
+
 # Create your models here.
 
 
@@ -10,6 +14,16 @@ class Estado(models.Model):
     # Como se fosse toString e self = this
     def __str__(self):
         return self.sigla + ' - ' + self.nome
+
+
+def form_valid(self, form):
+
+    # Define o usuário como usuário logado
+    form.instance.usuario = self.request.user
+
+    url = super().form_valid(form)
+
+    return url
 
 
 class Cidade(models.Model):
@@ -39,14 +53,16 @@ class Barbeiro(models.Model):
    
    
 class Caixa(models.Model):
-    Barbeiro = models.ForeignKey(Barbeiro, on_delete=models.PROTECT)
+    barbeiro = models.ForeignKey(Barbeiro, on_delete=models.PROTECT)
     entrada = models.CharField(max_length=5) 
     saida = models.CharField(max_length=50)
     formaPagamento = models.CharField(max_length=50)
- 
+    
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT)
 class Agendamento(models.Model):
     data = models.CharField(max_length=11)
-    
+    hora = models.CharField(max_length=4)
+    servico = models.CharField(max_length=10)
     
     
     

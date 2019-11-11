@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from braces.views import GroupRequiredMixin
+
 # Importa todas as classes do models.py
 
 # Importa função que vai chamar as urls pelo "name" delas
@@ -55,7 +57,8 @@ class FormularioView(TemplateView):
 ##################### INSERIR ######################
 
 
-class EstadoCreate(LoginRequiredMixin, CreateView):
+class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    group_required = u"administrador"
     # Define qual o modelo pra essa classe vai criar o form
     model = Estado
     # Qual o html que será utilizado?
@@ -106,7 +109,7 @@ class ClienteCreate(LoginRequiredMixin, CreateView):
         context = super(ClienteCreate, self).get_context_data(*args, **kwargs)
         context['titulo'] = "Cdastro de clientes" 
         context['botao'] = "cadastrar"
-        context['classesBotao'] = "btn-primary"
+        context['classeBotao'] = "btn-primary"
         return context
     
 
@@ -237,6 +240,7 @@ class ClienteUpdate(LoginRequiredMixin, UpdateView):
         context['titulo'] = "Editar cadastro de clientes"
         context['botao'] = "Salvar"
         context['classeBotao'] = "btn-success"
+
         return context
 
 

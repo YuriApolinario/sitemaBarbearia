@@ -107,6 +107,9 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'cadastrar-barbeiro' %}">barbeiro</a>
                 <a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">cliente</a>
+                <a class="dropdown-item" href="{% url 'cadastrar-agenda' %}">agenda</a>
+                <a class="dropdown-item" href="{% url 'cadastrar-caixa' %}">caixa</a>
+
               </div>
             </li>
 
@@ -115,6 +118,11 @@
                 <img src="static/images/icons/2.png" alt="">
                 <span class="menu-title">Curriculo</span>
               </a>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">
+                  <img src="static/images/icons/2.png" alt="">
+                  <span class="menu-title">Sair</span>
+                </a>
             </li>
            </ul> 
         {% endif %}

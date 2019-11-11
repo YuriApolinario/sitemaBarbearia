@@ -16,9 +16,9 @@
             <div class="col-lg">
     
                 <h3 class="border-bottom">
-                    Lista de Cidades cadastrados
+                    Lista de caixas cadastrados
     
-                    <a href="{% url 'cadastrar-cidade' %}" class="float-right btn btn-primary btn-sm">
+                    <a href="{% url 'cadastrar-caixa' %}" class="float-right btn btn-primary btn-sm">
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         Novo cidade
                     </a>
@@ -34,9 +34,9 @@
     
                     <thead>
                         <tr>
-                            <th>Cidade</th>
-                            <th>Estado</th>
-                            <th>Descrição</th>
+                            <th>entrada</th>
+                            <th>saida</th>
+                            
                             <th>Opções</th>
                         </tr>
                     </thead>
@@ -45,22 +45,22 @@
     
                         {% for obj in object_list %}
                         <tr>
-                            <td>{{ obj.nome }}</td>
-                            <td>{{ obj.estado }}</td>
+                            <td>{{ obj.entrada }}</td>
+                            <td>{{ obj.saida }}</td>
                          
                             <td>
-                                <a href="{% url 'editar-cidade' obj.pk %}" class="btn btn-outline-warning btn-sm">
+                                <a href="{% url 'editar-caixa' obj.pk %}" class="btn btn-outline-warning btn-sm">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </a>
     
-                                <a href="{% url 'excluir-cidade' obj.pk %}" class="btn btn-outline-danger btn-sm">
+                                <a href="{% url 'excluir-caixa' obj.pk %}" class="btn btn-outline-danger btn-sm">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="100%">Nenhuma cidade cadastrado</td>
+                            <td colspan="100%">Nenhum caixa cadastrado</td>
                         </tr>
                         {% endfor %}
     
