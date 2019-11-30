@@ -224,7 +224,6 @@ class CaixaUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         context['classeBotao'] = "btn-success"
         return context
 
-
 class AgendamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Agendamento
     group_required = u"Barbeiro"
@@ -246,7 +245,7 @@ class ClienteUpdate(LoginRequiredMixin, UpdateView):
     model = Cliente
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
-    fields = ['ome, telefone, cpf']
+    fields = ['nome', 'telefone', 'cpf']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
@@ -262,7 +261,7 @@ class BarbeiroUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Barbeiro
     group_required = u"Adminstrador"
     template_name = "agendamento/formulario.html"
-    success_url = reverse_lazy("listar-Barbeiro")
+    success_url = reverse_lazy("listar-barbeiros")
     fields = ['nome','especialidade']
    
     # Método utilizado para enviar dados ao template

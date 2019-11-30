@@ -18,10 +18,7 @@ class Estado(models.Model):
 class Cidade(models.Model):
     nome = models.CharField(max_length=50)
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
-    descricao = models.TextField(
-        blank=True, null=True, verbose_name="Descrição",
-        help_text="Espaço para colocar qualquer informação."
-    )
+   
 
     def __str__(self):
         return self.nome + '/' + self.estado.sigla
