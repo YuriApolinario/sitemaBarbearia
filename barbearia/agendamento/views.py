@@ -57,8 +57,8 @@ class FormularioView(TemplateView):
 ##################### INSERIR ######################
 
 
-class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
-    group_required = u"administrador"
+class EstadoCreate(LoginRequiredMixin, CreateView):
+    group_required = u"Barbeiro"
     # Define qual o modelo pra essa classe vai criar o form
     model = Estado
     # Qual o html que será utilizado?
@@ -84,9 +84,10 @@ class EstadoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 class CidadeCreate(LoginRequiredMixin, CreateView):
     model = Cidade
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-cidades")
-    fields = ['nome', 'estado', 'descricao']
+    fields = ['nome', 'estado']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
@@ -99,8 +100,9 @@ class CidadeCreate(LoginRequiredMixin, CreateView):
 
 
 
-class ClienteCreate(LoginRequiredMixin, CreateView):
+class ClienteCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Cliente
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
     fields = ['nome','cpf','telefone']
@@ -113,8 +115,9 @@ class ClienteCreate(LoginRequiredMixin, CreateView):
         return context
     
 
-class BarbeiroCreate(LoginRequiredMixin, CreateView):
+class BarbeiroCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Barbeiro
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-barbeiros")
     fields = ['nome','especialidade']
@@ -128,8 +131,9 @@ class BarbeiroCreate(LoginRequiredMixin, CreateView):
         return context
 
 
-class CaixaCreate(LoginRequiredMixin, CreateView):
+class CaixaCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Caixa
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("movimento-caixa")
     fields = ['entrada','saida', 'FormaPagamento']
@@ -142,8 +146,9 @@ class CaixaCreate(LoginRequiredMixin, CreateView):
         context['classeBotao'] = "btn-primary"
         return context
     
-class AgendamentoCreate(LoginRequiredMixin,CreateView):
+class AgendamentoCreate(GroupRequiredMixin, LoginRequiredMixin,CreateView):
     model = Agendamento
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     succes_url = reverse_lazy("movimento-caixa")
     fields=['data','hora','servico']
@@ -154,6 +159,13 @@ class AgendamentoCreate(LoginRequiredMixin,CreateView):
         context['botao'] = "agendar"
         context['classeBotao'] = "btn-primary"
         return context
+
+        # Define o usuário como usuário logado
+        form.instance.usuario = self.request.user
+
+        url = super().form_valid(form)
+
+        return url
 
 ##################### EDITAR ######################
 
@@ -197,8 +209,9 @@ class CidadeUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class CaixaUpdate(LoginRequiredMixin, UpdateView):
+class CaixaUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Caixa
+    group_required = u"Administrador"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-caixas")
     fields = ['descricao']
@@ -212,8 +225,9 @@ class CaixaUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class AgendamentoUpdate(LoginRequiredMixin, UpdateView):
+class AgendamentoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Agendamento
+    group_required = u"Barbeiro"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-agendamento")
     fields = ['descricao']
@@ -232,7 +246,7 @@ class ClienteUpdate(LoginRequiredMixin, UpdateView):
     model = Cliente
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
-    fields = ['Nome, telefone,cpf']
+    fields = ['ome, telefone, cpf']
 
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
@@ -244,10 +258,12 @@ class ClienteUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class BarbeiroUpdate(LoginRequiredMixin, UpdateView):
+class BarbeiroUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Barbeiro
+    group_required = u"Adminstrador"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-Barbeiro")
+    fields = ['nome','especialidade']
    
     # Método utilizado para enviar dados ao template
     def get_context_data(self, *args, **kwargs):
@@ -295,8 +311,9 @@ class CidadeDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
-class ClienteDelete(LoginRequiredMixin, DeleteView):
+class ClienteDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Cliente
+    group_required = u"Adminstrador"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-clientes")
 
@@ -307,8 +324,9 @@ class ClienteDelete(LoginRequiredMixin, DeleteView):
         context['classeBotao'] = "btn-danger"
         return context
 
-class BarbeiroDelete(LoginRequiredMixin, DeleteView):
+class BarbeiroDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Barbeiro
+    group_required = u"Adminstrador"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-barbeiros")
 
@@ -320,8 +338,9 @@ class BarbeiroDelete(LoginRequiredMixin, DeleteView):
         return context
 
 
-class AgendamentoDelete(LoginRequiredMixin, DeleteView):
+class AgendamentoDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Agendamento
+    group_required = u"Adminstrador"
     template_name = "agendamento/formulario.html"
     success_url = reverse_lazy("listar-agendamento")
 
@@ -364,6 +383,7 @@ class AgendamentoList(LoginRequiredMixin, ListView):
 
 
 
-class CaixaList(LoginRequiredMixin, ListView):
+class CaixaList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     model = Barbeiro
+    group_required = u"Adminstrador"
     template_name = "agendamento/listas/listar_caixa.html"

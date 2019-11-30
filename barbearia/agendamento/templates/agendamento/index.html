@@ -55,9 +55,24 @@
             <a class="nav-link profile-pic" href="#"><img class="rounded-circle" src="static/images/face.jpg"
                 alt=""></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-th"></i></a>
-          </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="fa fa-th"></i></a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                  Entrar
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'user-create' %}">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                  Registrar
+                </a>
+              </li>
+          {% endif %}
         </ul>
         <button class="navbar-toggler navbar-dark navbar-toggler-right d-lg-none align-self-center" type="button"
           data-toggle="offcanvas">
@@ -104,7 +119,6 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'cadastrar-estado' %}">Estado</a>
                 <a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'cadastrar-barbeiro' %}">barbeiro</a>
                 <a class="dropdown-item" href="{% url 'cadastrar-cliente' %}">cliente</a>
                 <a class="dropdown-item" href="{% url 'cadastrar-agenda' %}">agenda</a>
@@ -113,6 +127,23 @@
               </div>
             </li>
 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Consulta
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if request.user.groups.all.0.name == "Administrador" %}
+                <a class="dropdown-item" href="{% url 'listar-caixas' %}">caixas</a>
+                {% endif %}
+                <a class="dropdown-item" href="{% url 'listar-estados' %}">Estado</a>
+                <a class="dropdown-item" href="{% url 'listar-cidades' %}">Cidade</a>
+                <a class="dropdown-item" href="{% url 'listar-barbeiros' %}">Barbeiros</a>
+                <a class="dropdown-item" href="{% url 'listar-clientes' %}">clientes</a>
+                
+              </div>
+            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="{% url 'curriculo' %}">
                 <img src="static/images/icons/2.png" alt="">

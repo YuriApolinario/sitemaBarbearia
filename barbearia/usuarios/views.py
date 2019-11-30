@@ -1,3 +1,52 @@
-from django.shortcuts import render
+# Importa função que vai chamar as urls pelo "name" delas
+from django.urls import reverse_lazy
 
-# Create your views here.
+# Importar as classes Views para inserir, alterar e excluir utilizando formulários
+from django.views.generic.edit import CreateView
+
+# Importar o modelo User e Group
+from django.contrib.auth.models import User, Group
+
+# Importar o form padrão para cadastro de Barbeiros
+from django.contrib.auth.forms import UserCreationForm
+
+# Importar um método que da um erro 404 caso não encontre um objeto
+# Ele faz a mesma coisa que: Classe.objects.get(atributo="valor")
+from django.shortcuts import get_object_or_404
+
+
+# Classe de criação de Barbeiros
+# Não precisa usar o model = User porque o form_class que vai definir quem são os campos desse modelo a ser inserido
+class UsuarioCreate(CreateView):
+    form_class = UserCreationForm
+    template_name = "agendamento/formulario.html"
+    success_url = reverse_lazy("login")
+
+    # Método utilizado para enviar dados ao template
+    def get_context_data(self, *args, **kwargs):
+        context = super(UsuarioCreate, self).get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastro de novos Barbeiros"
+        context['botao'] = "Cadastrar"
+        context['classeBotao'] = "btn-success"
+        return context
+
+    # Iremos adicionar um grupo ao Barbeiro cadastrado
+    def form_valid(self, form):
+
+        # Busca o grupo pelo nome "Usuario"
+        # Primeiro faz a busca e depois chama o form valid para inserir o Barbeiro normalmente
+        grupo = get_object_or_404(Group, name="Barbeiro")
+    
+        # Executa o form_valid padrão... ele vai fazer todas as validações normais
+        # Cria o objeto 
+        url = super().form_valid(form)
+
+        # Se o grupo existir
+        if grupo:
+            # Adiciona o grupo ao Barbeiro que foi criado nesse form
+            self.object.groups.add(grupo)
+            # Salva o Barbeiro de novo
+            self.object.save()
+
+        # Retorno padrão
+        return url

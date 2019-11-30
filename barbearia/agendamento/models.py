@@ -15,17 +15,6 @@ class Estado(models.Model):
     def __str__(self):
         return self.sigla + ' - ' + self.nome
 
-
-def form_valid(self, form):
-
-    # Define o usuário como usuário logado
-    form.instance.usuario = self.request.user
-
-    url = super().form_valid(form)
-
-    return url
-
-
 class Cidade(models.Model):
     nome = models.CharField(max_length=50)
     estado = models.ForeignKey(Estado, on_delete=models.PROTECT)
@@ -37,9 +26,6 @@ class Cidade(models.Model):
     def __str__(self):
         return self.nome + '/' + self.estado.sigla
 
-
-
-
 class Cliente(models.Model):
     nome = models.CharField(max_length=50)
     cpf = models.CharField(max_length=11)
@@ -48,8 +34,8 @@ class Cliente(models.Model):
   
 
 class Barbeiro(models.Model):
-   nome = models.CharField(max_length=50)
-   especialidade = models.CharField(max_length=50)
+    nome = models.CharField(max_length=50)
+    especialidade = models.CharField(max_length=50)
    
    
 class Caixa(models.Model):

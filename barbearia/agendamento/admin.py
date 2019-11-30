@@ -8,5 +8,3 @@ admin.site.register(Estado)
 admin.site.register(Agendamento)
 admin.site.register(Caixa)
 
-
-# admin.site.register(Cliente)
